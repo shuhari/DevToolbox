@@ -13,9 +13,11 @@ class CentralWidget(QStackedWidget):
             if not widget:
                 widget = self.create_widget(widget_cls)
             if self.currentWidget():
+                self.activate_widget(self.currentWidget(), False)
                 self.currentWidget().hide()
             widget.show()
             self.setCurrentWidget(widget)
+            self.activate_widget(widget, True)
         except Exception as e:
             import traceback
             traceback.print_exc()
@@ -35,4 +37,17 @@ class CentralWidget(QStackedWidget):
         widget.setProperty('uid', widget_cls)
         widget.setVisible(False)
         self.addWidget(widget)
+        self.init_widget(widget)
         return widget
+
+    def call_widget_method(self, widget, method_name):
+        method = getattr(widget, method_name, None)
+        if method:
+            method()
+
+    def init_widget(self, widget):
+        self.call_widget_method(widget, 'on_initialized')
+
+    def activate_widget(self, widget, active):
+        method_name = 'on_activated' if active else 'on_deactivated'
+        self.call_widget_method(widget, method_name)
