@@ -8,5 +8,10 @@
         <source>Developer&apos;s Toolbox</source>
         <translation type="unfinished">开发者工具箱</translation>
     </message>
+    <message>
+        <location filename="../strings.py" line="10"/>
+        <source>Categories</source>
+        <translation type="unfinished">分类</translation>
+    </message>
 </context>
 </TS>

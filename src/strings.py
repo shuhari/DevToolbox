@@ -6,6 +6,9 @@ class Strings(QObject):
     def app_title(self):
         return self.tr("Developer's Toolbox")
 
+    def categories(self):
+        return self.tr("Categories")
+
 
 class StringReader:
     _strings = None

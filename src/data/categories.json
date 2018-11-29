@@ -1,0 +1,11 @@
+[
+    {
+        "title": "Python",
+        "children": [
+            {
+                "title": "DateTime",
+                "widget": "py.datetime_widget:DateTimeWidget"
+            }
+        ]
+    }
+]
