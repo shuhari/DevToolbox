@@ -40,6 +40,9 @@ class Strings(QObject):
     def text(self):
         return self.tr('Text')
 
+    def encode_decode(self):
+        return self.tr('Encode/Decode')
+
 
 class StringReader:
     _strings = None

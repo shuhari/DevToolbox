@@ -9,6 +9,10 @@
             {
                 "title": ":random_text",
                 "widget": "py.randtext_widget:RandomTextWidget"
+            },
+            {
+                "title": ":encode_decode",
+                "widget": "py.encode_widget:EncodeWidget"
             }
         ]
     }

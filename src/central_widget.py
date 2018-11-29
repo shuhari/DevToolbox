@@ -1,3 +1,12 @@
+"""
+Use stacked widget to manage multiple widgets.
+each widget has a 'uid' property corresponding to selected category.
+a widget may have optional methods:
+
+- on_initialized: called once when the widget it first time created
+- on_activated: called each time a widget become active page
+- on_deactivated: called each time a widget become deactive page
+"""
 import importlib
 
 from PyQt5.QtWidgets import *
@@ -18,6 +27,7 @@ class CentralWidget(QStackedWidget):
             widget.show()
             self.setCurrentWidget(widget)
             self.activate_widget(widget, True)
+            widget.setFocus()
         except Exception as e:
             import traceback
             traceback.print_exc()
