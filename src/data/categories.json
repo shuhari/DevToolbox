@@ -3,11 +3,11 @@
         "title": "Python",
         "children": [
             {
-                "title": "DateTime",
+                "title": ":datetime",
                 "widget": "py.datetime_widget:DateTimeWidget"
             },
             {
-                "title": "Random Text",
+                "title": ":random_text",
                 "widget": "py.randtext_widget:RandomTextWidget"
             }
         ]

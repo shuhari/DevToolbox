@@ -2,6 +2,8 @@ import lorem
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
+from strings import _
+
 
 class RandomTextWidget(QWidget):
     def __init__(self, parent=None):
@@ -9,9 +11,9 @@ class RandomTextWidget(QWidget):
         self.setupUi()
 
     def setupUi(self):
-        btn_sentence = QPushButton('Sentence')
-        btn_paragraph = QPushButton('Paragraph')
-        btn_text = QPushButton('Text')
+        btn_sentence = QPushButton(_('sentence'))
+        btn_paragraph = QPushButton(_('paragraph'))
+        btn_text = QPushButton(_('text'))
 
         self.sentence_edit = QLineEdit()
         self.sentence_edit.setReadOnly(True)

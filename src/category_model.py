@@ -2,20 +2,31 @@ import json
 
 from PyQt5.QtCore import *
 
+from strings import _
+
 
 class CategoryItem:
     def __init__(self, data, parent=None):
         self._parent = parent
         self._children = []
         self._row = parent.childCount() if parent else 0
+        self.load_data(data)
+
+    def load_data(self, data):
         if isinstance(data, dict):
-            self._title = data['title']
+            self._title = self.get_translated_text(data['title'])
             self._widgetClass = data.get('widget', None)
             self._icon = data.get('icon', None)
         if isinstance(data, str):
             self._title = data
             self._widgetClass = None
             self._icon = None
+
+    def get_translated_text(self, text):
+        if text.startswith(':'):
+            key = text[1:]
+            return _(key)
+        return text
 
     def __str__(self):
         message = 'CategoryItem(title={0}, widget={1})'
@@ -47,7 +58,7 @@ class CategoryItem:
     def widgetClass(self):
         return self._widgetClass
 
-    
+
 class CategoryModel(QAbstractItemModel):
     def __init__(self, parent=None):
         super(CategoryModel, self).__init__(parent)

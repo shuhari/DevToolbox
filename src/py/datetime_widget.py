@@ -4,6 +4,8 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import QPalette
 from PyQt5.QtWidgets import *
 
+from strings import _
+
 
 DATETIME_PYTHON_FORMAT = '%Y-%m-%d %H:%M:%S'
 DATETIME_QT_FORMAT = 'yyyy-MM-dd HH:mm:ss'
@@ -33,18 +35,18 @@ class DateTimeWidget(QWidget):
         self.comment = QTextBrowser()
 
         form1 = QFormLayout()
-        form1.addRow(QLabel("Value"), self.ftime_value)
-        form1.addRow(QLabel("Format"), self.ftime_format)
-        form1.addRow(QLabel("Result"), self.ftime_result)
+        form1.addRow(QLabel(_("value")), self.ftime_value)
+        form1.addRow(QLabel(_("format")), self.ftime_format)
+        form1.addRow(QLabel(_("result")), self.ftime_result)
 
         vbox1 = QVBoxLayout()
         vbox1.addWidget(lblftime)
         vbox1.addLayout(form1)
 
         form2 = QFormLayout()
-        form2.addRow(QLabel("Value"), self.ptime_value)
-        form2.addRow(QLabel("Format"), self.ptime_format)
-        form2.addRow(QLabel("Result"), self.ptime_result)
+        form2.addRow(QLabel(_("value")), self.ptime_value)
+        form2.addRow(QLabel(_("format")), self.ptime_format)
+        form2.addRow(QLabel(_("result")), self.ptime_result)
 
         vbox2 = QVBoxLayout()
         vbox2.addWidget(lblptime)

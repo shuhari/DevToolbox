@@ -7,3 +7,4 @@
 # DONE
 
 * implement ipsum info.
+* translate ui text.

@@ -1,4 +1,11 @@
-from PyQt5.QtCore import QObject, QCoreApplication
+"""
+Use _() to translate keyed text to native language.
+example:
+
+from strings import _
+btn.text = _('text_key')
+"""
+from PyQt5.QtCore import QObject
 
 
 class Strings(QObject):
@@ -8,6 +15,30 @@ class Strings(QObject):
 
     def categories(self):
         return self.tr("Categories")
+
+    def datetime(self):
+        return self.tr('Date/Time')
+
+    def random_text(self):
+        return self.tr('Random text')
+
+    def value(self):
+        return self.tr('Value')
+
+    def format(self):
+        return self.tr('Format')
+
+    def result(self):
+        return self.tr('Result')
+
+    def sentence(self):
+        return self.tr('Sentence')
+
+    def paragraph(self):
+        return self.tr('Paragraph')
+
+    def text(self):
+        return self.tr('Text')
 
 
 class StringReader:
