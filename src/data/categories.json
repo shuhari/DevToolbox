@@ -5,6 +5,10 @@
             {
                 "title": "DateTime",
                 "widget": "py.datetime_widget:DateTimeWidget"
+            },
+            {
+                "title": "Random Text",
+                "widget": "py.randtext_widget:RandomTextWidget"
             }
         ]
     }

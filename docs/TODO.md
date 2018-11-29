@@ -1,7 +1,9 @@
 # TODO
 
 * make datetime page look more pretty.
-* implement ipsum info.
 * implement md5 page.
+* add icons to tree view.
 
 # DONE
+
+* implement ipsum info.

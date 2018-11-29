@@ -16,6 +16,7 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(":/images/app.png"))
         self.setWindowTitle(_('app_title'))
         self.setMinimumSize(800, 600)
+        self.setFont(QFont('MS Shell Dlg 2', 10))
 
         self.setupUi()
 
