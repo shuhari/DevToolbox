@@ -1,6 +1,7 @@
 import json
 
 from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 from strings import _
 
@@ -58,6 +59,9 @@ class CategoryItem:
     def widgetClass(self):
         return self._widgetClass
 
+    def icon(self):
+        return self._icon
+
 
 class CategoryModel(QAbstractItemModel):
     def __init__(self, parent=None):
@@ -102,6 +106,9 @@ class CategoryModel(QAbstractItemModel):
         if index.column() == 0:
             if role == Qt.DisplayRole:
                 return item.title()
+            elif role == Qt.DecorationRole:
+                if item.icon():
+                    return QIcon(item.icon())
         return QVariant()
 
     def headerData(self, section, orientation, role=None):

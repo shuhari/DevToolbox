@@ -1,10 +1,10 @@
 # TODO
 
-* make datetime page look more pretty.
-* add icons to tree view.
+* html/xml/json format.
 
 # DONE
 
+* add icons to tree view.
 * implement ipsum info.
 * translate ui text.
 * implement md5 page.

@@ -1,6 +1,7 @@
 [
     {
         "title": "Python",
+        "icon": ":/images/python.png",
         "children": [
             {
                 "title": ":datetime",
