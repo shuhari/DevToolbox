@@ -1,7 +1,7 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from utils.encoders import EncodeMethod
+from utils.encoders import EncodeMethod, create_encoder
 
 
 class EncodeWidget(QWidget):
@@ -51,6 +51,8 @@ class EncodeWidget(QWidget):
 
         btnEncode.clicked.connect(self.on_encode)
         btnDecode.clicked.connect(self.on_decode)
+        self.src_edit.textChanged.connect(self.on_srcEdit_textChanged)
+        self.dest_edit.textChanged.connect(self.on_destEdit_textChanged)
 
     def create_method_radio(self, text, value):
         radio = QRadioButton(text)
@@ -60,19 +62,42 @@ class EncodeWidget(QWidget):
     def on_initialized(self):
         self.method_base64.setChecked(True)
 
-    def get_method(self):
+    def get_encoder(self):
+        method = EncodeMethod.base64
         if self.method_md5.isChecked():
-            return EncodeMethod.md5
+            method = EncodeMethod.md5
         elif self.method_url.isChecked():
-            return EncodeMethod.url
+            method = EncodeMethod.url
         elif self.method_html.isChecked():
-            return EncodeMethod.html
-        return EncodeMethod.base64
+            method = EncodeMethod.html
+        return create_encoder(method)
 
     @pyqtSlot()
     def on_encode(self):
-        pass
+        try:
+            src = self.src_edit.toPlainText().strip()
+            encoder = self.get_encoder()
+            result = encoder.encode(src)
+            self.dest_edit.setPlainText(result)
+        except Exception as e:
+            self.dest_edit.setPlainText(str(e))
 
     @pyqtSlot()
     def on_decode(self):
-        pass
+        try:
+            src = self.dest_edit.toPlainText().strip()
+            encoder = self.get_encoder()
+            result = encoder.decode(src)
+            self.src_edit.setPlainText(result)
+        except Exception as e:
+            self.src_edit.setPlainText(str(e))
+
+    @pyqtSlot()
+    def on_srcEdit_textChanged(self):
+        if self.src_edit.hasFocus():
+            self.on_encode()
+
+    @pyqtSlot()
+    def on_destEdit_textChanged(self):
+        if self.dest_edit.hasFocus():
+            self.on_decode()
