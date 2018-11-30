@@ -1,5 +1,14 @@
 [
     {
+        "title": ":file",
+        "children": [
+            {
+                "title": ":check_file_hash",
+                "widget": "fs.filehash_widget:FileHashWidget"
+            }
+        ]
+    },
+    {
         "title": "Python",
         "icon": ":/images/python.png",
         "children": [

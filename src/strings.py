@@ -43,6 +43,39 @@ class Strings(QObject):
     def encode_decode(self):
         return self.tr('Encode/Decode')
 
+    def encode(self):
+        return self.tr('Encode')
+
+    def decode(self):
+        return self.tr('Decode')
+
+    def method(self):
+        return self.tr('Method')
+
+    def file(self):
+        return self.tr('File')
+
+    def check_file_hash(self):
+        return self.tr('Check file hash')
+
+    def check(self):
+        return self.tr('Check')
+
+    def check_file_hash_header(self):
+        return self.tr('File: {0}')
+
+    def open_file_title(self):
+        return self.tr('Select file to open')
+
+    def file_filter_all(self):
+        return self.tr('All files (*.*)')
+
+    def msg_file_not_exist(self):
+        return self.tr('File not exist: {0}')
+
+    def msg_checking_file_hash(self):
+        return self.tr('Checking file hash, please wait...')
+
 
 class StringReader:
     _strings = None

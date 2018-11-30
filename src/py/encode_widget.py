@@ -2,6 +2,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
 from utils.encoders import EncodeMethod, create_encoder
+from strings import _
 
 
 class EncodeWidget(QWidget):
@@ -25,7 +26,7 @@ class EncodeWidget(QWidget):
         self.dest_edit.setFixedHeight(300)
 
         method_box = QHBoxLayout()
-        method_box.addWidget(QLabel('Method:'))
+        method_box.addWidget(QLabel(_('method')))
         method_box.addWidget(self.method_base64)
         method_box.addWidget(self.method_md5)
         method_box.addWidget(self.method_url)
