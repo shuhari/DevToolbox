@@ -3,13 +3,14 @@ import os
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
+from ui_mixins import TextColorMixin
 from utils import hashers
 from strings import _
 
 
 class FileHashThread(QThread):
 
-    finished = pyqtSignal(list)
+    finished = pyqtSignal(bool, list)
 
     def __init__(self, file_path, methods, parent=None):
         super(FileHashThread, self).__init__(parent)
@@ -17,6 +18,7 @@ class FileHashThread(QThread):
         self.methods = methods
 
     def run(self):
+        success = True
         lines = []
         try:
             lines.append(_('check_file_hash_header').format(self.file_path))
@@ -25,7 +27,8 @@ class FileHashThread(QThread):
             self.get_hash_result(lines, 'sha256', hashers.sha256)
         except Exception as e:
             lines.append(str(e))
-        self.finished.emit(lines)
+            success = False
+        self.finished.emit(success, lines)
 
     def get_hash_result(self, lines, method, fn):
         if method in self.methods:
@@ -33,7 +36,7 @@ class FileHashThread(QThread):
             lines.append('{0}: {1}'.format(method.upper(), hash_result))
 
 
-class FileHashWidget(QWidget):
+class FileHashWidget(QWidget, TextColorMixin):
     def __init__(self, parent=None):
         super(FileHashWidget, self).__init__(parent)
         self.setupUi()
@@ -85,9 +88,9 @@ class FileHashWidget(QWidget):
     @pyqtSlot()
     def on_browse(self):
         filePath, filter = QFileDialog.getOpenFileName(self,
-                                                       'Select file',
+                                                       _('open_file_title'),
                                                        '',
-                                                       'All files (*.*)')
+                                                       _('file_filter_all'))
         if filePath:
             self.file_edit.setText(filePath)
 
@@ -115,9 +118,9 @@ class FileHashWidget(QWidget):
             thread.finished.connect(self.on_thread_finished)
             thread.start()
         except Exception as e:
-            self.result_edit.setText(str(e))
+            self.setColoredText(self.result_edit, str(e), False)
 
-    @pyqtSlot(list)
-    def on_thread_finished(self, lines):
-        self.result_edit.setText('\n'.join(lines))
+    @pyqtSlot(bool, list)
+    def on_thread_finished(self, success, lines):
+        self.setColoredText(self.result_edit, '\n'.join(lines), success)
         self.on_thread_running(False)

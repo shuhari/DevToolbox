@@ -1,11 +1,12 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
+from ui_mixins import TextColorMixin
 from utils.encoders import EncodeMethod, create_encoder
 from strings import _
 
 
-class EncodeWidget(QWidget):
+class EncodeWidget(QWidget, TextColorMixin):
     def __init__(self, parent=None):
         super(EncodeWidget, self).__init__(parent)
         self.setupUi()
@@ -79,9 +80,9 @@ class EncodeWidget(QWidget):
             src = self.src_edit.toPlainText().strip()
             encoder = self.get_encoder()
             result = encoder.encode(src)
-            self.dest_edit.setPlainText(result)
+            self.setColoredText(self.dest_edit, result, True)
         except Exception as e:
-            self.dest_edit.setPlainText(str(e))
+            self.setColoredText(self.dest_edit, str(e), False)
 
     @pyqtSlot()
     def on_decode(self):
@@ -89,9 +90,9 @@ class EncodeWidget(QWidget):
             src = self.dest_edit.toPlainText().strip()
             encoder = self.get_encoder()
             result = encoder.decode(src)
-            self.src_edit.setPlainText(result)
+            self.setColoredText(self.src_edit, result, True)
         except Exception as e:
-            self.src_edit.setPlainText(str(e))
+            self.setColoredText(self.src_edit, str(e), False)
 
     @pyqtSlot()
     def on_srcEdit_textChanged(self):

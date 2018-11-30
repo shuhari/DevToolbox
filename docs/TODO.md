@@ -1,10 +1,10 @@
 # TODO
 
 * html/xml/json format.
-* use color text mixin.
 
 # DONE
 
+* use color text mixin.
 * file check.
 * add icons to tree view.
 * implement ipsum info.

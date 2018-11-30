@@ -5,13 +5,14 @@ from PyQt5.QtGui import QPalette
 from PyQt5.QtWidgets import *
 
 from strings import _
+from ui_mixins import TextColorMixin
 
 
 DATETIME_PYTHON_FORMAT = '%Y-%m-%d %H:%M:%S'
 DATETIME_QT_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 
 
-class DateTimeWidget(QWidget):
+class DateTimeWidget(QWidget, TextColorMixin):
     def __init__(self, parent=None):
         super(DateTimeWidget, self).__init__(parent)
         self.setupUi()
@@ -68,12 +69,6 @@ class DateTimeWidget(QWidget):
         self.ptime_format.textChanged.connect(self.on_ptime_sourceChanged)
 
     def on_initialized(self):
-        self.normal_palette = QPalette()
-        self.normal_palette.setColor(QPalette.Text, Qt.blue)
-
-        self.error_palette = QPalette()
-        self.error_palette.setColor(QPalette.Text, Qt.red)
-
         now = datetime.now()
         self.ftime_value.setDateTime(now)
         self.ptime_value.setText(now.strftime(DATETIME_PYTHON_FORMAT))
@@ -93,11 +88,9 @@ class DateTimeWidget(QWidget):
             value = self.ftime_value.dateTime().toPyDateTime()
             format = self.ftime_format.text().strip()
             result = value.strftime(format)
-            self.ftime_result.setText(result)
-            self.ftime_result.setPalette(self.normal_palette)
+            self.setColoredText(self.ftime_result, result, True)
         except Exception as e:
-            self.ftime_result.setText(str(e))
-            self.ftime_result.setPalette(self.error_palette)
+            self.setColoredText(self.ftime_result, str(e), False)
 
     @pyqtSlot()
     def on_ptime_sourceChanged(self):
@@ -105,9 +98,8 @@ class DateTimeWidget(QWidget):
             value = self.ptime_value.text().strip()
             format = self.ptime_format.text().strip()
             result = datetime.strptime(value, format)
-            self.ptime_result.setText(result.strftime(DATETIME_PYTHON_FORMAT))
-            self.ptime_result.setPalette(self.normal_palette)
+            self.setColoredText(self.ptime_result,
+                                result.strftime(DATETIME_PYTHON_FORMAT),
+                                True)
         except Exception as e:
-            self.ptime_result.setText(str(e))
-            self.ptime_result.setPalette(self.error_palette)
-
+            self.setColoredText(self.ptime_result, str(e), False)
