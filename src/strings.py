@@ -52,6 +52,9 @@ class Strings(QObject):
     def method(self):
         return self.tr('Method')
 
+    def directory(self):
+        return self.tr('Directory')
+
     def file(self):
         return self.tr('File')
 
@@ -67,6 +70,9 @@ class Strings(QObject):
     def open_file_title(self):
         return self.tr('Select file to open')
 
+    def select_dir_title(self):
+        return self.tr('Select directory')
+
     def file_filter_all(self):
         return self.tr('All files (*.*)')
 
@@ -78,6 +84,30 @@ class Strings(QObject):
 
     def clean_dir(self):
         return self.tr('Clean Directory')
+
+    def clean(self):
+        return self.tr('Clean')
+
+    def deletable_files(self):
+        return self.tr('Deletable files')
+
+    def msg_directory_not_exist(self):
+        return self.tr('Directory not exist: {0}')
+
+    def msg_delete_dir_success(self):
+        return self.tr('Delete directory success: {0}')
+
+    def msg_delete_dir_failed(self):
+        return self.tr('Delete directory {0} failed, error={1}')
+
+    def msg_delete_file_failed(self):
+        return self.tr('Delete file {0} failed, error={1}')
+
+    def msg_thread_finished(self):
+        return self.tr('Thread execution finished.')
+
+    def msg_clean_summary(self):
+        return self.tr('Found {0} directories, delete ok: {1}, delete failed: {2}.')
 
 
 class StringReader:

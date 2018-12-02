@@ -1,3 +1,5 @@
 lorem==0.1.1
+pypiwin32==223
 PyQt5==5.11.3
 PyQt5-sip==4.19.13
+pywin32==224

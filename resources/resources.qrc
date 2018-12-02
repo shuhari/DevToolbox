@@ -2,5 +2,8 @@
     <qresource prefix="/images">
         <file alias="app.png">images/app.png</file>
         <file alias="python.png">images/python.png</file>
+        <file alias="info.png">images/info.png</file>
+        <file alias="warn.png">images/warn.png</file>
+        <file alias="error.png">images/error.png</file>
     </qresource>
 </RCC>
