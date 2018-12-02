@@ -4,6 +4,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
 from strings import _
+from utils.data_parser import parse_title
 
 
 class CategoryItem:
@@ -15,19 +16,13 @@ class CategoryItem:
 
     def load_data(self, data):
         if isinstance(data, dict):
-            self._title = self.get_translated_text(data['title'])
+            self._title = parse_title(data['title'])
             self._widgetClass = data.get('widget', None)
             self._icon = data.get('icon', None)
         if isinstance(data, str):
             self._title = data
             self._widgetClass = None
             self._icon = None
-
-    def get_translated_text(self, text):
-        if text.startswith(':'):
-            key = text[1:]
-            return _(key)
-        return text
 
     def __str__(self):
         message = 'CategoryItem(title={0}, widget={1})'

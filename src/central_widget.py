@@ -7,9 +7,9 @@ a widget may have optional methods:
 - on_activated: called each time a widget become active page
 - on_deactivated: called each time a widget become deactive page
 """
-import importlib
-
 from PyQt5.QtWidgets import *
+
+from utils.data_parser import create_page
 
 
 class CentralWidget(QStackedWidget):
@@ -20,13 +20,13 @@ class CentralWidget(QStackedWidget):
         try:
             widget = self.find_widget(widget_cls)
             if not widget:
-                widget = self.create_widget(widget_cls)
+                widget = self.create_page(widget_cls)
             if self.currentWidget():
-                self.activate_widget(self.currentWidget(), False)
+                self.activate_page(self.currentWidget(), False)
                 self.currentWidget().hide()
             widget.show()
             self.setCurrentWidget(widget)
-            self.activate_widget(widget, True)
+            self.activate_page(widget, True)
             widget.setFocus()
         except Exception as e:
             import traceback
@@ -39,25 +39,22 @@ class CentralWidget(QStackedWidget):
                 return widget
         return None
 
-    def create_widget(self, widget_cls):
-        module_name, class_name = widget_cls.split(':')
-        module = importlib.import_module(module_name)
-        cls = getattr(module, class_name)
-        widget = cls()
-        widget.setProperty('uid', widget_cls)
-        widget.setVisible(False)
-        self.addWidget(widget)
-        self.init_widget(widget)
-        return widget
+    def create_page(self, page_cls):
+        page = create_page(page_cls)
+        page.setProperty('uid', page_cls)
+        page.setVisible(False)
+        self.addWidget(page)
+        self.init_page(page)
+        return page
 
-    def call_widget_method(self, widget, method_name):
-        method = getattr(widget, method_name, None)
+    def call_page_method(self, page, method_name):
+        method = getattr(page, method_name, None)
         if method:
             method()
 
-    def init_widget(self, widget):
-        self.call_widget_method(widget, 'on_initialized')
+    def init_page(self, widget):
+        self.call_page_method(widget, 'on_initialized')
 
-    def activate_widget(self, widget, active):
+    def activate_page(self, widget, active):
         method_name = 'on_activated' if active else 'on_deactivated'
-        self.call_widget_method(widget, method_name)
+        self.call_page_method(widget, method_name)

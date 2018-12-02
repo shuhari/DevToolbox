@@ -5,6 +5,10 @@
             {
                 "title": ":check_file_hash",
                 "widget": "pages.fs.filehash_page:FileHashPage"
+            },
+            {
+                "title": ":clean_dir",
+                "widget": "pages.fs.cleandir_page:CleanDirPage"
             }
         ]
     },

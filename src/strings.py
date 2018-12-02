@@ -76,6 +76,9 @@ class Strings(QObject):
     def msg_checking_file_hash(self):
         return self.tr('Checking file hash, please wait...')
 
+    def clean_dir(self):
+        return self.tr('Clean Directory')
+
 
 class StringReader:
     _strings = None
