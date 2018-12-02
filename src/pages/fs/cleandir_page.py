@@ -4,6 +4,7 @@ import glob
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
+from pages.base_page import BasePage
 from utils.fileutils import enum_directory, is_empty_dir, delete_dir, delete_file
 from widgets.loglist import LogListWidget
 from strings import _
@@ -65,7 +66,7 @@ class CleanThread(QThread):
         return False
 
 
-class CleanDirPage(QWidget):
+class CleanDirPage(BasePage):
     def __init__(self, parent=None):
         super(CleanDirPage, self).__init__(parent)
         self.setupUi()
@@ -100,6 +101,18 @@ class CleanDirPage(QWidget):
 
     def on_initialized(self):
         self.log_list.clear()
+        self.load_settings()
+
+    def load_settings(self):
+        settings = self.app_settings().cleandir
+        self.dir_edit.setText(settings.dirname)
+        self.deletable_edit.setText(settings.deletable_files)
+
+    def save_settings(self, dirname, deletable_files):
+        settings = self.app_settings().cleandir
+        settings.dirname = dirname
+        settings.deletable_files = deletable_files
+        self.app_settings().save()
 
     @pyqtSlot()
     def on_browse(self):
@@ -117,6 +130,7 @@ class CleanDirPage(QWidget):
             if not dir_name or not os.path.isdir(dir_name):
                 raise ValueError(_('msg_directory_not_exist'.format(dir_name)))
             deletable_files = self.deletable_edit.text().strip()
+            self.save_settings(dir_name, deletable_files)
             thread = CleanThread(dir_name, deletable_files, self)
             thread.notify.connect(self.on_thread_notify)
             thread.finished.connect(self.on_thread_finished)
