@@ -4,7 +4,7 @@
         "children": [
             {
                 "title": ":check_file_hash",
-                "widget": "fs.filehash_widget:FileHashWidget"
+                "widget": "pages.fs.filehash_page:FileHashPage"
             }
         ]
     },
@@ -14,15 +14,15 @@
         "children": [
             {
                 "title": ":datetime",
-                "widget": "py.datetime_widget:DateTimeWidget"
+                "widget": "pages.py.datetime_page:DateTimePage"
             },
             {
                 "title": ":random_text",
-                "widget": "py.randtext_widget:RandomTextWidget"
+                "widget": "pages.py.randtext_page:RandomTextPage"
             },
             {
                 "title": ":encode_decode",
-                "widget": "py.encode_widget:EncodeWidget"
+                "widget": "pages.py.encode_page:EncodePage"
             }
         ]
     }

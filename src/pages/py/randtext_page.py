@@ -5,9 +5,9 @@ from PyQt5.QtWidgets import *
 from strings import _
 
 
-class RandomTextWidget(QWidget):
+class RandomTextPage(QWidget):
     def __init__(self, parent=None):
-        super(RandomTextWidget, self).__init__(parent)
+        super(RandomTextPage, self).__init__(parent)
         self.setupUi()
 
     def setupUi(self):

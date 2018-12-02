@@ -3,7 +3,7 @@ import os
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from ui_mixins import TextColorMixin
+from widgets.mixins import TextColorMixin
 from utils import hashers
 from strings import _
 
@@ -36,9 +36,9 @@ class FileHashThread(QThread):
             lines.append('{0}: {1}'.format(method.upper(), hash_result))
 
 
-class FileHashWidget(QWidget, TextColorMixin):
+class FileHashPage(QWidget, TextColorMixin):
     def __init__(self, parent=None):
-        super(FileHashWidget, self).__init__(parent)
+        super(FileHashPage, self).__init__(parent)
         self.setupUi()
 
     def setupUi(self):

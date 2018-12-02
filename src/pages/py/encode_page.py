@@ -1,14 +1,14 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from ui_mixins import TextColorMixin
+from widgets.mixins import TextColorMixin
 from utils.encoders import EncodeMethod, create_encoder
 from strings import _
 
 
-class EncodeWidget(QWidget, TextColorMixin):
+class EncodePage(QWidget, TextColorMixin):
     def __init__(self, parent=None):
-        super(EncodeWidget, self).__init__(parent)
+        super(EncodePage, self).__init__(parent)
         self.setupUi()
 
     def setupUi(self):

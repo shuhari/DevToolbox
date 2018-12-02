@@ -5,16 +5,16 @@ from PyQt5.QtGui import QPalette
 from PyQt5.QtWidgets import *
 
 from strings import _
-from ui_mixins import TextColorMixin
+from widgets.mixins import TextColorMixin
 
 
 DATETIME_PYTHON_FORMAT = '%Y-%m-%d %H:%M:%S'
 DATETIME_QT_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 
 
-class DateTimeWidget(QWidget, TextColorMixin):
+class DateTimePage(QWidget, TextColorMixin):
     def __init__(self, parent=None):
-        super(DateTimeWidget, self).__init__(parent)
+        super(DateTimePage, self).__init__(parent)
         self.setupUi()
 
     def setupUi(self):
