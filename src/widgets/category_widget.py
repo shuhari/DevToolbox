@@ -1,7 +1,7 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from category_model import CategoryItem, CategoryModel
+from widgets.category_model import CategoryItem, CategoryModel
 
 
 class CategoryWidget(QWidget):

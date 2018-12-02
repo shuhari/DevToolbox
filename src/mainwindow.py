@@ -2,11 +2,10 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
-import qrc_resources
 from strings import _
-from category_model import CategoryItem
-from category_widget import CategoryWidget
-from central_widget import CentralWidget
+from widgets.category_model import CategoryItem
+from widgets.category_widget import CategoryWidget
+from widgets.central_widget import CentralWidget
 
 
 class MainWindow(QMainWindow):
